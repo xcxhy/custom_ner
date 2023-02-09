@@ -26,7 +26,7 @@ def train(training_data):
     doc_bin.to_disk("training_data.spacy")
     print("Skipping:",skip)
 if __name__ == '__main__':
-    path = "./dataset/new_real_ner_dict.pkl"
+    path = "/Users/xcxhy/AIProject/dataset/ner/new_real_ner_dict.pkl"
     with open(path, 'rb') as f:
         data = pickle.load(f)
     train(data)
