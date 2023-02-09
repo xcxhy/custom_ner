@@ -10,8 +10,11 @@ We simply extracted a part of car brands, types and component from the wiki, man
 
 General annotation tools likes, 
 [Doccano](https://doccano.herokuapp.com)
+
 [Tagtog](https://www.tagtog.net)
+
 [LightTag](https://www.lighttag.io)
+
 [Prodigy](https://demo.prodi.gy/?=null&view_id=ner_manual)
 
  If you have both sentences and entity words, you might as well use the get_ner_dataset.py to directly generate the files needed for training through matching.
