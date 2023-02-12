@@ -30,7 +30,11 @@ class NER_Dataset(object):
         self.nums = config['nums']
         self.batch = config['batch']
         self.class_path = config["class_path"]
-        self.text = self.read_text()
+        self.text_type = config['text_type']
+        if self.text_type == 'pkl':
+            self.text = self.read_text()
+        elif self.text_type == "txt":
+            self.text = read_list_txt(self.text_path)
         self.classes = self.read_class()
         self.entity_names, self.entities = self.read_keywords()
             
@@ -153,16 +157,15 @@ class NER_Dataset(object):
 
 @ex.config
 def ner_data_config():
-    entity_path = "./dataset/entity"
-    class_path = "./dataset/class.txt"
-    # entity_path = "/home/data_normal/nlp/xuhao/xcxhy/Knowledge_Graph/counter_query_freq/dict/entities.txt"
-    # brand_path = "/home/data_normal/nlp/xuhao/xcxhy/Knowledge_Graph/counter_query_freq/dict/brands.txt"
-    # model_path = "/home/data_normal/nlp/xuhao/xcxhy/Knowledge_Graph/counter_query_freq/dict/models.txt"
-    # specification_path = "/home/data_normal/nlp/xuhao/xcxhy/Knowledge_Graph/counter_query_freq/dict/specifications.txt"
-    text_path = "/Users/xcxhy/AIProject/dataset/ner/prodid_to_prodname_dict.pkl"
-    save_dir = "./dataset"
-    nums = 0
-    batch = 500000
+    entity_path = "./dataset/entity"  # your entity dictory
+    class_path = "./dataset/class.txt" # your class file
+    
+    text_type = 'pkl' # if your file is txt, you shold use "txt"
+    text_path = "/Users/xcxhy/AIProject/dataset/ner/prodid_to_prodname_dict.pkl" # your text file path
+    
+    save_dir = "./dataset" # save dir 
+    nums = 0 # process number
+    batch = 500000 # Amount of data handled by each process  
     
 _config = ner_data_config()
 
