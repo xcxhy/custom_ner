@@ -25,6 +25,14 @@ python get_ner_dataset.py
 ```
 
 You can modify your file location and other parameters in the ner_data_config() function in the file, and there are corresponding annotations. This is a code that can use multi-process to speed up the operation, so nums and batch are particularly important. If your data volume Not much, you can directly set nums to 0 when using a single process, and set batch to the length of your data.
- 
+
+Also you can use this code to set the parameters, but note that there must be no spaces before and after "="
+
+```
+python get_ner_dataset.py with entity_path="./dataset/entity" \                                         
+class_path="./dataset/class.txt" text_type='pkl' \  
+text_path="/Users/xcxhy/AIProject/dataset/ner/prodid_to_prodname_dict.pkl" \ 
+save_dir="./dataset" nums=0 batch=500000  
+```
 
  **Attention:** This requires you to use the category you want to identify to name the file, for example, we use "brand.txt" to name the brand entity.
