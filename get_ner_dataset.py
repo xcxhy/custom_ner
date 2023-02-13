@@ -28,7 +28,7 @@ class NER_Dataset(object):
         self.text_path = config["text_path"]
         self.save_dir = config["save_dir"]
         self.nums = config['nums']
-        self.batch = config['batch']
+        
         self.class_path = config["class_path"]
         self.text_type = config['text_type']
         if self.text_type == 'pkl':
@@ -37,7 +37,12 @@ class NER_Dataset(object):
             self.text = read_list_txt(self.text_path)
         self.classes = self.read_class()
         self.entity_names, self.entities = self.read_keywords()
-            
+        
+        if self.nums==0:
+            self.batch = len(self.text)
+        else:
+            self.batch = config['batch']
+
     def read_text(self):
         prodid_to_prodname_dict = pickle.load(open(self.text_path, "rb"))
         text = [j[0] for i,j in prodid_to_prodname_dict.items()]

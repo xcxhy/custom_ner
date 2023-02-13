@@ -1,10 +1,16 @@
 import os
+import argparse
 import pickle
 
 if __name__=='__main__':
-    dict_dir = "/home/data_normal/nlp/xuhao/xcxhy/Knowledge_Graph/counter_query_freq/ner_dataset"
+    parser = argparse.ArgumentParser(description='Demo of argparse')
+    parser.add_argument('--nums', type=int, default=0)
+    parser.add_argument('--data_dir', type=str, default="/Users/xcxhy/Github_folder/custom_ner/dataset")
+    args = parser.parse_args()
+
     file_name = "ner_"
-    nums = [i for i in range(3)]
+    dict_dir = args.data_dir
+    nums = [i for i in range(args.nums)]
     for i in nums:
         if i == 0:
             use_path = os.path.join(dict_dir, (file_name + str(i) + '.pkl'))
