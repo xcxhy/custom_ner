@@ -1,9 +1,14 @@
 import os
 import pickle
+import argparse
+from sacred import Experiment
 import spacy
 from spacy.tokens import DocBin
 from tqdm import tqdm
+from util import *
 from spacy.util import filter_spans
+
+ex = Experiment("process!")
 
 def train(training_data):
     nlp = spacy.blank('en')
@@ -25,10 +30,21 @@ def train(training_data):
         doc_bin.add(doc)
     doc_bin.to_disk("training_data.spacy")
     print("Skipping:",skip)
-if __name__ == '__main__':
-    path = "/Users/xcxhy/AIProject/dataset/ner/new_real_ner_dict.pkl"
-    with open(path, 'rb') as f:
-        data = pickle.load(f)
+
+@ex.config
+def config():
+    path = "./dataset/new_real_ner_dict.pkl"
+    type = "pkl"
+_config = config()
+
+@ex.automain
+def main(_config):
+    if _config['type'] == "pkl":
+        with open(_config["path"], 'rb') as f:
+            data = pickle.load(f)
+    elif _config['type'] == "json":
+        data = read_dict_json(_config["type"])
+    
     train(data)
     
     

@@ -48,4 +48,11 @@ MacOS
 source main.sh
 ```
 ##Build NER dataset
+Using the above data processing method, a **new_real_ner_dict.pkl** file will be obtained. It is stored in the form of a dictionary. The outermost key is "annotations", which are embedded with two dictionaries with "text" and "entities" as keys. "text" stores the sentence text, and "entities" stores a list consisting of multiple (start, end, label) triples.
+
+If you use other methods to preprocess the data, in order to ensure the normal operation of the training, please save the dictionary in this structure. The file type can be saved as "pkl" or "json". Please input the file path and type into the terminal before running the code.（default type="pkl", path="./dataset/new_real_ner_dict.pkl"）
+
+```
+python spacy_dataset.py with path=<your file path> type=<your type>
+```
 
