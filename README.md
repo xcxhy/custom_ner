@@ -55,4 +55,13 @@ If you use other methods to preprocess the data, in order to ensure the normal o
 ```
 python spacy_dataset.py with path=<your file path> type=<your type>
 ```
+##Train Model
+Before training, you must first add a configuration file to [sapcy config](https://spacy.io/usage/training#quickstart) and choose the task you need to train.
+
+
+We have two files for training the model, one is train.py and split_train.py, if the amount of data is not much, you can run train.py directly.(Make sure to run **get_ner_dataset.py** before running the **train.py** file)
+```
+python train.py
+```
+
 
