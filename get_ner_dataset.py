@@ -165,8 +165,8 @@ def ner_data_config():
     entity_path = "./dataset/entity"  # your entity dictory
     class_path = "./dataset/class.txt" # your class file
     
-    text_type = 'pkl' # if your file is txt, you shold use "txt"
-    text_path = "/Users/xcxhy/AIProject/dataset/ner/prodid_to_prodname_dict.pkl" # your text file path
+    text_type = 'txt' # if your file is txt, you shold use "txt"
+    text_path = "./dataset/text.txt" # your text file path
     
     save_dir = "./dataset" # save dir 
     nums = 0 # process number

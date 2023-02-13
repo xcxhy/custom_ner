@@ -6,10 +6,10 @@ cd /Users/xcxhy/Github_folder/custom_ner # The directory where the executable fi
 
 entity_path="./dataset/entity"  # The entities file 
 class_path="./dataset/class.txt" # class file path
-text_type='pkl' # Type of text
-text_path="/Users/xcxhy/AIProject/dataset/ner/prodid_to_prodname_dict.pkl" # the text path
+text_type='txt' # Type of text
+text_path="./dataset/text.txt" # the text path
 save_dir="./dataset" # The save dir
-nums=3 # Use process nums
+nums=0 # Use process nums
 batch=500 # Amount of data handled by each process 
 
 for ((i=0; i<=nums; i++))
@@ -22,7 +22,7 @@ do
 done
 wait
 
-nohup python concat_dict.py --nums $nums --data_dir $save_dir > result/concat
+python concat_dict.py --nums $nums --data_dir $save_dir
 
 end=`date +%s`  #定义脚本运行的结束时间
  
