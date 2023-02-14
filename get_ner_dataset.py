@@ -21,10 +21,6 @@ ex = Experiment("NER_DATA")
 class NER_Dataset(object):
     def __init__(self,config):
         self.entity_path = config['entity_path']
-
-        # self.brand_path = config["brand_path"]
-        # self.model_path = config["model_path"]
-        # self.specification_path = config["specification_path"]
         self.text_path = config["text_path"]
         self.save_dir = config["save_dir"]
         self.nums = config['nums']
@@ -113,37 +109,6 @@ class NER_Dataset(object):
                 continue
             else:
                 temp_dict['text'] = single_sentence
-            # for method in methods:
-            #     if method == 'entities':
-            #         data = self.entities
-            #         single_entity = self.match_words(single_sentence, data)
-
-            #     elif method == 'brands':
-            #         data = self.brands
-            #         single_brand = self.match_words(single_sentence, data)
-                    
-            #     elif method == 'models':
-            #         data = self.models
-            #         single_model = self.match_words(single_sentence, data)
-            # if single_entity == [] and single_brand == [] and single_model == []:
-            #     continue
-            # else:
-            #     temp_dict['text'] = single_sentence
-            #     for value1 in single_entity:
-            #         start1, end1, label1 = int(value1[0]), int(value1[1]), "PRODUCT"
-            #         temp_dict['entities'].append((start1, end1, label1))
-            #     for value2 in single_brand:
-            #         start2, end2, label2 = int(value2[0]), int(value2[1]), "BRAND"
-            #         temp_dict['entities'].append((start2, end2, label2))
-            #     for value3 in single_model:
-            #         start3, end3, label3 = int(value3[0]), int(value3[1]), "MODEL"
-            #         temp_dict['entities'].append((start3, end3, label3))
-                
-                    
-                # elif method == 'specifications':
-                #     data = self.specifications
-                #     res = self.match_words(single_sentence, data)
-                    # data = vars()[method]
             training_data['annotations'].append((temp_dict))
             # regulation_result = self.match_regulation(sentence_result)
             # result.append(regulation_result)
