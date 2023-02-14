@@ -79,6 +79,7 @@ python split_train.py
 ```
 During the training process, you can use GPU acceleration, set the **gpu-id** parameter to **0** or specify the graphics card in the training code.
 
+#### Finally, we provide a **run.sh** script, prepare the required parameters and data in the file, and run the training directly.
 * * * *
 ## Test
 Simple test using **ner_infer.py** file
