@@ -1,4 +1,4 @@
-# custom_ner
+# Custom NER
 * * * *
 Use our code can easy to train a custom new model to infer.
 
@@ -78,7 +78,7 @@ python split_train.py
 During the training process, you can use GPU acceleration, set the **gpu-id** parameter to **0** or specify the graphics card in the training code.
 
 * * * *
-## Test and Infer
+## Test
 Simple test using **ner_infer.py** file
 ```
 python ner_infer.py
