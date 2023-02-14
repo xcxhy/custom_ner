@@ -31,14 +31,15 @@ def split_train(path, training_data, index):
         filtered_ents = filter_spans(ents)
         doc.ents = filtered_ents
         doc_bin.add(doc)
-    doc_bin.to_disk("/home/data_normal/nlp/xuhao/xcxhy/Automatic_Delivery/Text_only/text_ner/training_data.spacy")
+    doc_bin.to_disk("training_data.spacy")
     print("skip:", Skip)
 
 @ex.config
 def train_config():
-    process_nums = 5
-    path = "./dataset/new_real_ner_dict.pkl"
-    model_path = "./model-best"
+    process_nums = 5 # the dataset split numbers
+    path = "./dataset/new_real_ner_dict.pkl" # the training data
+    model_path = "./model-best" 
+    each_batch = 1000 # each epoch process data length
 
 _config = train_config()
 
@@ -52,8 +53,8 @@ def run(_config):
     with open(_config["path"], "rb") as f:
         data = pickle.load(f)
     for index in range(_config["process_nums"]):
-        split_train(_config["model_path"], data['annotations'][index*1000:(index+1)*1000], index)
+        split_train(_config["model_path"], data['annotations'][index*_config["each_batch"]:(index+1)*_config["each_batch"]], index)
         time.sleep(10)
-        os.system("python -m spacy train config.cfg --output ./ --paths.train ./training_data.spacy --paths.dev ./training_data.spacy --gpu-id 1")
+        os.system("python -m spacy train config.cfg --output ./ --paths.train ./training_data.spacy --paths.dev ./training_data.spacy --gpu-id -1")
         time.sleep(15)
     print("Train Over!")

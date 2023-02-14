@@ -43,11 +43,11 @@ Multi-process runs the main.sh file directly, and the parameters that need to be
 
 Liunx：
 ```
-./main.sh
+./data.sh
 ```
 MacOS
 ```
-source main.sh
+source data.sh
 ```
 * * * *
 ##Build NER dataset
@@ -66,9 +66,20 @@ You can choose not to set, use our default settings, only do **ner** tasks, and 
 
 **Attention**: If you use your own settings, make sure the **base_config.cfg** file is in the **custom_ner** folder.
 
-We have two files for training the model, one is train.py and split_train.py, if the amount of data is not much, you can run train.py directly.(Make sure to run **get_ner_dataset.py** before running the **train.py** file)
+We have two files for training the model, one is train.py and split_train.py, if the amount of data is not much, you can run train.py directly.(Make sure to run **spacy_dataset.py** before running the **train.py** file)
 ```
 python train.py
 ```
+The **split_train.py** file is mainly to solve the memory problem caused by too much training text.
 
+```
+python split_train.py
+```
+During the training process, you can use GPU acceleration, set the **gpu-id** parameter to **0** or specify the graphics card in the training code.
 
+* * * *
+## Test and Infer
+Simple test using **ner_infer.py** file
+```
+python ner_infer.py
+```
