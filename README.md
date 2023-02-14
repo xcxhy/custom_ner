@@ -1,4 +1,5 @@
 # custom_ner
+* * * *
 Use our code can easy to train a custom new model to infer.
 
 This project is implemented based on [spacy](https://github.com/explosion/spaCy). So I'm just a porter.
@@ -18,8 +19,9 @@ General annotation tools likes,
 [LightTag](https://www.lighttag.io)
 
 [Prodigy](https://demo.prodi.gy/?=null&view_id=ner_manual)
-
+* * * *
 ##Data processing
+
  If you have both sentences and entity words, you might as well use the **get_ner_dataset.py** to directly generate the files needed for training through matching.
 
 You can modify your file location and other parameters in the **ner_data_config()** function in the file, and there are corresponding annotations. This is a code that supports multi-processing. If you don't have much data, you can run the following code for single-process operation.
@@ -47,6 +49,7 @@ MacOS
 ```
 source main.sh
 ```
+* * * *
 ##Build NER dataset
 Using the above data processing method, a **new_real_ner_dict.pkl** file will be obtained. It is stored in the form of a dictionary. The outermost key is "annotations", which are embedded with two dictionaries with "text" and "entities" as keys. "text" stores the sentence text, and "entities" stores a list consisting of multiple (start, end, label) triples.
 
@@ -55,9 +58,13 @@ If you use other methods to preprocess the data, in order to ensure the normal o
 ```
 python spacy_dataset.py with path=<your file path> type=<your type>
 ```
+* * * *
 ##Train Model
 Before training, you must first add a configuration file to [sapcy config](https://spacy.io/usage/training#quickstart) and choose the task you need to train.
+![config.jpg](./md_file/config.jpg)
+You can choose not to set, use our default settings, only do **ner** tasks, and choose gpu acceleration at the same time.If you need more settings please refer to the documentation.
 
+**Attention**: If you use your own settings, make sure the **base_config.cfg** file is in the **custom_ner** folder.
 
 We have two files for training the model, one is train.py and split_train.py, if the amount of data is not much, you can run train.py directly.(Make sure to run **get_ner_dataset.py** before running the **train.py** file)
 ```

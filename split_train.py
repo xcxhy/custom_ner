@@ -3,9 +3,12 @@ import os
 import pickle
 import time
 from tqdm import tqdm
+from sacred import Experiment
 from spacy import displacy
 from spacy.tokens import DocBin
 from spacy.util import filter_spans
+
+ex = Experiment("split train")
 
 def split_train(path, training_data, index):
     if index == 0:
@@ -31,17 +34,26 @@ def split_train(path, training_data, index):
     doc_bin.to_disk("/home/data_normal/nlp/xuhao/xcxhy/Automatic_Delivery/Text_only/text_ner/training_data.spacy")
     print("skip:", Skip)
 
-if __name__=='__main__':
-    nums = 5
-    path = "/home/data_normal/nlp/xuhao/xcxhy/Automatic_Delivery/Text_only/text_ner/data/real_ner_dict.pkl"
-    model_path = "/home/data_normal/nlp/xuhao/xcxhy/Automatic_Delivery/Text_only/text_ner/model-best"
-    # os.system("curl -o base_config.cfg https://gist.githubusercontent.com/vinothpandian/d821b2ffd47682aa436a831e7e3e333e/raw/c15dd08676ece5df4e181d02499952d88d062de8/base_config.cfg")
-    # os.system("python -m spacy init fill-config base_config.cfg config.cfg")
-    with open(path, "rb") as f:
+@ex.config
+def train_config():
+    process_nums = 5
+    path = "./dataset/new_real_ner_dict.pkl"
+    model_path = "./model-best"
+
+_config = train_config()
+
+@ex.automain
+def run(_config):
+    if os.path.exists("base_config.cfg"):
+        os.system("python -m spacy init fill-config base_config.cfg config.cfg")
+    else:
+        os.system("curl -o base_config.cfg https://gist.githubusercontent.com/vinothpandian/d821b2ffd47682aa436a831e7e3e333e/raw/c15dd08676ece5df4e181d02499952d88d062de8/base_config.cfg")
+        os.system("python -m spacy init fill-config base_config.cfg config.cfg")
+    with open(_config["path"], "rb") as f:
         data = pickle.load(f)
-    for index in range(nums):
-        split_train(model_path, data['annotations'][index*1000:(index+1)*1000], index)
+    for index in range(_config["process_nums"]):
+        split_train(_config["model_path"], data['annotations'][index*1000:(index+1)*1000], index)
         time.sleep(10)
-        os.system("python -m spacy train config.cfg --output ./ --paths.train ./training_data.spacy --paths.dev ./training_data.spacy --gpu-id 2")
-        time.sleep(10)
+        os.system("python -m spacy train config.cfg --output ./ --paths.train ./training_data.spacy --paths.dev ./training_data.spacy --gpu-id 1")
+        time.sleep(15)
     print("Train Over!")
