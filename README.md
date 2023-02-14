@@ -6,7 +6,19 @@ Use our code can easy to train a custom new model to infer.
 
 This project is implemented based on [spacy](https://github.com/explosion/spaCy). So I'm just a porter.
 
-First you can use the test.py to ner some car brands, types and component.
+**Configuration Environment：**
+```                                    
+pip install -r requirements.txt
+```
+If your **nltk.dwonload()** reports an error, please click the link directly, download the zip and unzip it. Rename the **packages** folder to **nltk_data** and move it to the directory where the error was reported.
+
+If you want to use cuda to accelerate training, you need to install spacy corresponding to your GPU cuda version.
+```
+pip install spacy[cuda102]
+```
+It means that your cuda is **version 10.2**
+
+First you can use the **ner_infer.py** to ner some car brands, types and component.
 
 For the model, we use a small amount of manual annotation.
 

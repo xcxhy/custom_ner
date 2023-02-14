@@ -1,0 +1,6 @@
+spacy
+spacy-transformers
+sacred
+argparse
+tqdm
+nltk
