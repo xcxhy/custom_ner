@@ -4,6 +4,7 @@ sys.path.append("/home/data_normal/nlp/xuhao/xcxhy/Automatic_Delivery")
 import spacy
 from tqdm import tqdm
 from spacy.tokens import DocBin
+from spacy import displacy
 from util import get_lemmatize
 from util import *
 
@@ -11,10 +12,13 @@ from util import *
 class NER_INFER(object):
     def __init__(self,model_path="./model-best"):
         self.best_nlp = spacy.load(model_path)
+        self.colors = {"PRODUCT": "#F67DE3", "BRAND": "#7DF6D9", "MODEL":"#FFFFFF"}
+        self.options = {"colors": self.colors} 
 
     def detector(self,text):
         result = []
         doc = self.best_nlp(text)
+        spacy.displacy.render(doc, style="ent", options= self.options, jupyter=True)
         for ent in doc.ents:
             result.append((ent.text, ent.label_))
         return result
