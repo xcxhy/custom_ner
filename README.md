@@ -2,6 +2,8 @@
 * * * *
 Use our code can easy to train a custom new model to infer.
 
+![infer.jpg](./md_file/infer.jpg)
+
 This project is implemented based on [spacy](https://github.com/explosion/spaCy). So I'm just a porter.
 
 First you can use the test.py to ner some car brands, types and component.
